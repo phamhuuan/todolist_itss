@@ -2,11 +2,14 @@ import React, {useEffect} from "react";
 import {Button, Col, Row} from "react-bootstrap";
 import useForm from "./hooks/useForm";
 import "./App.css";
+import useTask, {Priority} from "./hooks/useTask";
 
 const App = () => {
 	const {isOpen} = useForm();
+  const {tasks, addTask} = useTask();
 
 	const onToggleForm = () => {
+    addTask({name: 'An', id: '123', priority: Priority.HIGH});
 		// TODO: click button to open/close create task form
 	};
 
@@ -14,7 +17,7 @@ const App = () => {
 		<div>
 			<div className="container">
 				<div className="text-center">
-					<h1>Quản lý công việc</h1>
+					<h1>Quản lý công việc {tasks.length}</h1>
 					<hr />
 				</div>
 				<Row>
