@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import FormProvider from './contexts/FormContext';
+import TaskFormDataProvider from './contexts/TaskFormDataContext';
+import TaskProvider from './contexts/TaskContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FormProvider><TaskFormDataProvider><TaskProvider>
+			<App />
+		</TaskProvider></TaskFormDataProvider></FormProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

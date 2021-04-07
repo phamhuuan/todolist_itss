@@ -1,37 +1,76 @@
 import React from 'react';
+import {Button, Form} from 'react-bootstrap';
+import {FormType, Priority} from '../@types';
 import useForm from '../hooks/useForm';
+import useTask from '../hooks/useTask';
+import useTaskFormData from '../hooks/useTaskFormData';
+import randomString from 'random-string';
+
+const generateId = () => {
+  return randomString({length: 5}) + '-' + randomString({length: 5}) + '-' + randomString({length: 5}) + '-' + randomString({length: 5});
+}
 
 const TaskForm = () => {
-	const {isOpen} = useForm();
+	const {isOpen, closeForm, formType} = useForm();
+	const {formData, setFormData, removeFormDataField} = useTaskFormData();
+	const {addTask, updateTask} = useTask();
 
-	if (isOpen) return null;
+	const onCloseForm = () => {
+		// TODO: Đóng form
+	};
+
+	const onChange = (event) => {
+		// TODO: Xử lí sự kiện thay đổi mức độ tên và mức độ quan trọng của task
+	};
+
+	const onClear = () => {
+		// TODO: Xóa dữ liệu trong form chuyển về mặc định
+		removeFormDataField();
+	}
+
+	const onHandleSubmit = (event) => {
+		event.preventDefault();
+		// Xử lí sự kiện thêm hoặc cập nhật task
+		switch (formType) {
+			case FormType.ADD:
+				// TODO: Lưu task mới
+				break;
+			case FormType.EDIT:
+				// TODO: Lưu task sau khi thay đổi
+				break;
+			default:
+				break;
+		}
+	};
+
+	if (!isOpen) return null;
 	return (
 		<div className="panel panel-warning">
 				<div className="panel-heading">
 					<h3 className="panel-title">
-						{!this.state.id ? 'Thêm công việc' : 'Cập nhật công việc'}
-						<span className="fa fa-times-circle text-right" onClick={this.onCloseForm}></span>
+						{formType === FormType.ADD ? 'Thêm công việc' : 'Cập nhật công việc'}
+						<span className="fa fa-times-circle text-right" onClick={onCloseForm}></span>
 					</h3>
 				</div>
 				<div className="panel-body">
-					<Form onSubmit={this.onHandleSubmit}>
+					<Form onSubmit={onHandleSubmit}>
 						<Form.Group controlId="jobName">
 							<Form.Label>Tên</Form.Label>
-							<Form.Control type="text"  placeholder="Nhập tên công việc" name="name" value={this.state.name} onChange={this.onChange} />
+							<Form.Control type="text"  placeholder="Nhập tên công việc" name="name" value={formData.name} onChange={onChange} />
 						</Form.Group>
 						<Form.Group controlId="status">
 							<Form.Label>Mức độ quan trọng</Form.Label>
-							<Form.Control as="select" name="status" value={this.state.status} onChange={this.onChange}>
-								<option value={true}>Quan trọng</option>
-								<option value={false}>Không quan trọng</option>
+							<Form.Control as="select" name="priority" value={formData.priority} onChange={onChange}>
+								<option value={Priority.HIGH}>Quan trọng</option>
+								<option value={Priority.LOW}>Không quan trọng</option>
 							</Form.Control>
 							<br/>
 							<div className="text-center">
-								<Button type="submit" variant="warning">
+								<Button type="submit" variant="warning" disabled={formData.name.trim() === ''}>
 									<span className="fa fa-plus mr-5" />
 									Lưu lại
 								</Button>&nbsp;
-								<Button type="button" variant="danger" onClick={this.onClear}>
+								<Button type="button" variant="danger" onClick={onClear}>
 									<span className="fa fa-close mr-5" />
 									Hủy bỏ
 								</Button>
@@ -42,3 +81,5 @@ const TaskForm = () => {
 			</div>
 	);
 };
+
+export default TaskForm;

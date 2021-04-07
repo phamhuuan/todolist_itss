@@ -1,28 +1,15 @@
-import {Priority, Task} from './useTask';
-import {useState} from 'react';
-
-export interface UseTaskFormDataType {
-  formData: Task;
-  removeFormDataField: () => void;
-  setFormDataField: (task: Task) => void;
-}
+import {useContext} from 'react';
+import {UseTaskFormDataType, Priority} from '../@types';
+import {TaskFormDataContext} from '../contexts/TaskFormDataContext';
 
 const useTaskFormData = (): UseTaskFormDataType => {
-  const [formData, setFormData] = useState<Task>({
-    id: '',
-    name: '',
-    priority: Priority.HIGH,
-  });
+	const {formData, setFormData} = useContext(TaskFormDataContext);
 
   const removeFormDataField = (): void => {
-    // TODO: xóa các trường dữ liệu trong form nhập task
+		// TODO: xóa các trường dữ liệu trong form nhập task
   }
 
-  const setFormDataField = (task: Task): void => {
-    // TODO: set các trường dữ liệu trong form nhập task
-  }
-
-  return {formData, removeFormDataField, setFormDataField};
+  return {formData, removeFormDataField, setFormData};
 };
 
 export default useTaskFormData;

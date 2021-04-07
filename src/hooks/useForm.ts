@@ -1,14 +1,9 @@
-import {useState} from 'react';
-
-export interface UseFromType {
-	isOpen: boolean;
-	toggleForm: () => void;
-	openForm: () => void;
-	closeForm: () => void;
-}
+import {useContext} from 'react';
+import {UseFromType} from '../@types';
+import {FormContext} from '../contexts/FormContext';
 
 const useForm = (): UseFromType => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const {isOpen, setIsOpen, formType, setFormType} = useContext(FormContext);
 
 	const toggleForm = (): void => {
 		// TODO: thay đổi trạng thái của form (đóng -> mở || mở -> đóng)
@@ -22,7 +17,7 @@ const useForm = (): UseFromType => {
 		// TODO: đóng form
 	};
 
-	return {isOpen, toggleForm, openForm, closeForm};
+	return {isOpen, toggleForm, openForm, closeForm, formType, setFormType};
 }
 
 export default useForm;
