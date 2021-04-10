@@ -27,8 +27,8 @@ const TaskList = () => {
 			<thead>
 				<tr>
 					<th width='5%' className="text-center">STT</th>
-					<th width='45%' className="text-center">Tên</th>
-					<th width='20%' className="text-center">Độ quan trọng</th>
+					<th width='50%' className="text-center">Tên</th>
+					<th width='15%' className="text-center">Độ quan trọng</th>
 					<th width='30%' className="text-center">Hành động</th>
 				</tr>
 			</thead>
@@ -36,7 +36,7 @@ const TaskList = () => {
 				<tr>
 					<td width='5%' />
 					<td width='45%'>
-						<Form.Control type="text" name="filterName" value={filter.filterName} onChange={onChange} />
+						<Form.Control type="text" name="filterName" value={filter.filterName} onChange={onChange} placeholder='Enter to filter'/>
 					</td>
 					<td width='20%'>
 						<Form.Control as="select" name="filterPriority" value={filter.filterPriority} onChange={onChange}>
