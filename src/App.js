@@ -13,7 +13,7 @@ const App = () => {
 	const {removeFormDataField} = useTaskFormData();
 
 	const onToggleForm = () => {
-		// TODO: click button to open/close create task form
+		toggleForm();
 	};
 
 	return (
