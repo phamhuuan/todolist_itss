@@ -20,7 +20,7 @@ const TaskItem = ({task, index}) => {
 	};
 
 	const deleteTask = () => {
-		// TODO: Xóa task
+		removeTask(task.id);
 	}
 
 	return (
