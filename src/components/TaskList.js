@@ -15,7 +15,8 @@ const TaskList = () => {
 
 	useEffect(() => {
 		// TODO: filter, sort tasks
-	}, []);
+		setDisplayTasks(tasks)
+	}, [tasks]);
 
 	const onChange = (event) => {
 		// TODO: Xử lí sự kiện thay đổi filter trên form

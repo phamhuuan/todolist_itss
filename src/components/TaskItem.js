@@ -13,10 +13,12 @@ const TaskItem = ({task, index}) => {
 
 	const changePriority = () => {
 		// TODO: Thay đổi độ quan trọng khi bấm vào label độ quan trọng
+		updateTask(task.id, {...task, priority: task.priority === Priority.HIGH ? Priority.LOW : Priority.HIGH})
 	};
 
 	const editTask = () => {
 		// TODO: Mở form chỉnh sửa task
+		
 	};
 
 	const deleteTask = () => {
