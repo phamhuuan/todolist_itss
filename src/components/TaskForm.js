@@ -16,27 +16,29 @@ const TaskForm = () => {
 	const {addTask, updateTask} = useTask();
 
 	const onCloseForm = () => {
-		// TODO: Đóng form
+		closeForm();
 	};
 
 	const onChange = (event) => {
-		// TODO: Xử lí sự kiện thay đổi mức độ tên và mức độ quan trọng của task
+		var target = event.target;
+		var name = target.name;
+		var value = target.value;
+		setFormData({id: generateId(),[name]: value});
 	};
 
 	const onClear = () => {
-		// TODO: Xóa dữ liệu trong form chuyển về mặc định
 		removeFormDataField();
 	}
 
 	const onHandleSubmit = (event) => {
 		event.preventDefault();
-		// Xử lí sự kiện thêm hoặc cập nhật task
+		// TODO : xử lí submit
 		switch (formType) {
 			case FormType.ADD:
-				// TODO: Lưu task mới
+				addTask(formData);
 				break;
 			case FormType.EDIT:
-				// TODO: Lưu task sau khi thay đổi
+				updateTask(formData);
 				break;
 			default:
 				break;
@@ -66,7 +68,7 @@ const TaskForm = () => {
 							</Form.Control>
 							<br/>
 							<div className="text-center">
-								<Button type="submit" variant="warning" disabled={formData.name.trim() === ''}>
+								<Button type="submit" variant="warning" disabled={formData.name === ''}>
 									<span className="fa fa-plus mr-5" />
 									Lưu lại
 								</Button>&nbsp;
