@@ -21,9 +21,12 @@ const TaskForm = () => {
 
 	const onChange = (event) => {
 		var target = event.target;
-		var name = target.name;
 		var value = target.value;
-		setFormData({id: generateId(),[name]: value});
+		if (target.name === 'name'){
+			setFormData({id: generateId(),name: value, priority: Priority.HIGH});
+		}else{
+			setFormData({id: formData.id, name: formData.name, priority: value});
+		}
 	};
 
 	const onClear = () => {
@@ -32,7 +35,6 @@ const TaskForm = () => {
 
 	const onHandleSubmit = (event) => {
 		event.preventDefault();
-		// TODO : xử lí submit
 		switch (formType) {
 			case FormType.ADD:
 				addTask(formData);

@@ -14,8 +14,7 @@ const TaskList = () => {
 	});
 
 	useEffect(() => {
-		// TODO: filter, sort tasks
-		setDisplayTasks(tasks)
+		setDisplayTasks(tasks);
 	}, [tasks]);
 
 	const onChange = (event) => {
