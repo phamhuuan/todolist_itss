@@ -19,7 +19,7 @@ const TaskList = () => {
 		setFilter(event.target.value);
 		// setTimeout(() => {
 			setDisplayTasks(tasks.filter((task) => {
-				return task.name.includes(filter)
+				return task.name.toLowerCase().includes(event.target.value.toLowerCase())
 			}))
 			console.log(filter);
 		// }, 1000);
