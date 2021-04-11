@@ -23,9 +23,9 @@ const TaskForm = () => {
 		var target = event.target;
 		var value = target.value;
 		if (target.name === 'name'){
-			setFormData({id: generateId(),name: value, priority: Priority.HIGH});
+			setFormData({id: generateId(),name: value, priority: formData.priority});
 		}else{
-			setFormData({id: formData.id, name: formData.name, priority: value});
+			setFormData({id: formData.id, name: formData.name, priority: Number(value)});
 		}
 	};
 
