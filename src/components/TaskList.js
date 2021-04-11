@@ -14,8 +14,29 @@ const TaskList = () => {
 	});
 
 	useEffect(() => {
-		setDisplayTasks(tasks);
-	}, [tasks]);
+		let tempTasks = tasks;
+		if (sort.sortBy === SortBy.BY_NAME) {
+			tempTasks = tempTasks.sort((task1, task2) => {
+				if (sort.sortType === SortType.ASC) {
+					if (task1.name < task2.name) return -1;
+					return 1;
+				} else {
+					if (task1.name > task2.name) return -1;
+					return 1;
+				}
+			});
+		}
+		if (sort.sortBy === SortBy.BY_PRIORITY) {
+			tempTasks = tempTasks.sort((task1, task2) => {
+				if (sort.sortType === SortType.ASC) {
+					return task1.priority - task2.priority;
+				} else {
+					return task2.priority - task1.priority;
+				}
+			})
+		}
+		setDisplayTasks([...tempTasks]);
+	}, [tasks,sort]);
 
 	const onChange = (event) => {
 		// TODO: Xử lí sự kiện thay đổi filter trên form
