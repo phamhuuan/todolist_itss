@@ -44,8 +44,8 @@ const useTask = (): UseTaskType => {
 		tasks[index] = newValue;
 		setTasks([...tasks]);
 		localStorage.setItem(STORAGE_TASKS_KEY, JSON.stringify([...tasks]));
-		removeFormDataField();
-		closeForm();
+		// removeFormDataField();
+		// closeForm();
 	}
 
 	return {tasks, addTask, removeTask, updateTask, sort, setSort, filterText, setFilterText};
