@@ -19,7 +19,7 @@ const TaskList = () => {
 		setFilter(event.target.value);
 		// setTimeout(() => {
 			setDisplayTasks(tasks.filter((task) => {
-				return task.name.includes(filter)
+				return task.name.toLowerCase().includes(event.target.value.toLowerCase())
 			}))
 			console.log(filter);
 		// }, 1000);
@@ -43,11 +43,11 @@ const TaskList = () => {
 						<Form.Control type="text" name="filterName" value={filter} onChange={onChange} placeholder='Enter to filter' />
 					</td>
 					<td width='20%'>
-						<Form.Control as="select" name="filterPriority" value={'-1'}>
+						{/* <Form.Control as="select" name="filterPriority" value={'-1'}>
 							<option value={'-1'}>Tất cả</option>
 							<option value={Priority.HIGH}>Quan trọng</option>
 							<option value={Priority.LOW}>Không quan trọng</option>
-						</Form.Control>
+						</Form.Control> */}
 					</td>
 					<td width='30%' />
 				</tr>
