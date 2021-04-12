@@ -8,10 +8,26 @@ import { Priority, SortBy, SortType } from '../@types';
 const TaskList = () => {
 	const { tasks, sort, filterText } = useTask();
 	const [displayTasks, setDisplayTasks] = useState(tasks);
-	const [filter, setFilter] = useState('');
+	const [filter, setFilter] = useState({
+		filterName: '',
+		filterPriority: '-1',
+	});
 
 	useEffect(() => {
 		let tempTasks = tasks;
+
+		if (filter.filterName !== '') {
+			tempTasks = tasks.filter((task) => {
+				return task.name.toLowerCase().includes(filter.filterName.toLowerCase())
+			})
+		}
+
+		if (filter.filterPriority !== '-1') {
+			tempTasks = tempTasks.filter((task) => {
+				return task.priority === parseInt(filter.filterPriority, 10);
+			});
+		}
+
 		if (sort.sortBy === SortBy.BY_NAME) {
 			tempTasks = tempTasks.sort((task1, task2) => {
 				if (sort.sortType === SortType.ASC) {
@@ -33,17 +49,13 @@ const TaskList = () => {
 			})
 		}
 		setDisplayTasks([...tempTasks]);
-	}, [tasks,sort]);
+	}, [tasks, sort, filter]);
 
 	const onChange = (event) => {
 		// TODO: Xử lí sự kiện thay đổi filter trên form
-		setFilter(event.target.value);
-		// setTimeout(() => {
-			setDisplayTasks(tasks.filter((task) => {
-				return task.name.toLowerCase().includes(event.target.value.toLowerCase())
-			}))
-			// console.log(filter);
-		// }, 1000);
+		const {name, value} = event.target;
+		console.log(name, value);
+		setFilter({...filter, [name]: value});
 	}
 
 
@@ -61,14 +73,14 @@ const TaskList = () => {
 				<tr>
 					<td width='5%' />
 					<td width='45%'>
-						<Form.Control type="text" name="filterName" value={filter} onChange={onChange} placeholder='Enter to filter' />
+						<Form.Control type="text" name="filterName" value={filter.filterName} onChange={onChange} placeholder='Enter to filter' />
 					</td>
 					<td width='20%'>
-						{/* <Form.Control as="select" name="filterPriority" value={'-1'}>
+						<Form.Control as="select" name="filterPriority" value={filter.filterPriority} onChange={onChange}>
 							<option value={'-1'}>Tất cả</option>
-							<option value={Priority.HIGH}>Quan trọng</option>
-							<option value={Priority.LOW}>Không quan trọng</option>
-						</Form.Control> */}
+							<option value={Priority.HIGH}>Độ ưu tiên cao</option>
+							<option value={Priority.LOW}>Độ ưu tiên thấp</option>
+						</Form.Control>
 					</td>
 					<td width='30%' />
 				</tr>
